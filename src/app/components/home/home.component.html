@@ -1,0 +1,21 @@
+<div class="form-group">
+  <label for="todo-text">Todo: </label>
+  <input
+    type="text"
+    class="form-control"
+    id="todo-text"
+    aria-describedby="help"
+    [(ngModel)]="todoText"
+  />
+  <small id="help" class="form-text text-muted"
+    >Add the todo description on above text field</small
+  >
+</div>
+
+<button type="submit" class="btn btn-primary" (click)="addTodo($event)">
+  Add Todo
+</button>
+
+<hr />
+<h3>List of Todos:</h3>
+<app-todo-list [todos]="(todos$ | async).todos"></app-todo-list>
