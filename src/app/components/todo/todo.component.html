@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-body">
+    <p class="card-text">
+      {{ todo.text
+      }}<span *ngIf="todo.completed" class="badge badge-secondary">Done</span>
+    </p>
+    <button class="btn btn-primary btn-sm " (click)="onComplete($event)">
+      Done
+    </button>
+  </div>
+</div>
