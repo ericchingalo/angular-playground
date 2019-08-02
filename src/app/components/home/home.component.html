@@ -12,10 +12,12 @@
   >
 </div>
 
-<button type="submit" class="btn btn-primary" (click)="addTodo($event)">
+<button type="submit" class="btn btn-primary btn-sm" (click)="addTodo($event)">
   Add Todo
 </button>
 
-<hr />
-<h3>List of Todos:</h3>
-<app-todo-list [todos]="(todos$ | async).todos"></app-todo-list>
+<div *ngIf="(todosCount$ | async) >= 1">
+  <hr />
+  <h3>List of Todos:</h3>
+  <app-todo-list [todos]="todos$ | async"></app-todo-list>
+</div>

@@ -12,15 +12,9 @@ export class TodoComponent implements OnInit, OnChanges {
 
   ngOnInit() {}
 
-  ngOnChanges() {
-    console.log(this.todo);
-  }
+  ngOnChanges() {}
 
-  editTodo(e) {
-    e.stopPropagation();
-  }
-
-  deleteTodo(e) {
+  onComplete(e) {
     e.stopPropagation();
   }
 }

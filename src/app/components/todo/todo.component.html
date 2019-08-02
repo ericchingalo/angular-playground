@@ -4,7 +4,8 @@
       {{ todo.text
       }}<span *ngIf="todo.completed" class="badge badge-secondary">Done</span>
     </p>
-    <button class="btn btn-primary" (click)="editTodo($event)">Edit</button>
-    <button class="btn btn-danger" (click)="deleteTodo($event)">Delet</button>
+    <button class="btn btn-primary btn-sm " (click)="onComplete($event)">
+      Done
+    </button>
   </div>
 </div>
