@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { TodoComponent } from './components/todo/todo.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { effects } from './store/effects';
+import { AngularFirestore } from '@angular/fire/firestore';
 @NgModule({
   declarations: [AppComponent, HomeComponent, TodoComponent, TodoListComponent],
   imports: [
@@ -34,7 +35,7 @@ import { effects } from './store/effects';
     }),
     EffectsModule.forRoot(effects)
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

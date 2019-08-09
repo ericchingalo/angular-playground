@@ -3,7 +3,6 @@ import { Store, select } from '@ngrx/store';
 import { Todo } from '../../models/todo.model';
 import { addTodo, loadTodo } from '../../store/actions';
 import { Observable } from 'rxjs';
-import { TodoService } from 'src/app/services/todo.service';
 import { selectAllTodoList, currentTodoCount } from 'src/app/store/selectors';
 
 @Component({
@@ -16,13 +15,9 @@ export class HomeComponent implements OnInit {
   todosCount$: Observable<any>;
 
   todoText: string;
-  constructor(
-    private store: Store<{ Todo }>,
-    private todoService: TodoService
-  ) {}
+  constructor(private store: Store<{ Todo }>) {}
 
   ngOnInit() {
-    this.store.dispatch(loadTodo());
     this.todos$ = this.store.select(selectAllTodoList);
     this.todosCount$ = this.store.select(currentTodoCount);
   }
@@ -30,7 +25,6 @@ export class HomeComponent implements OnInit {
   addTodo(e) {
     e.stopPropagation();
     const myTodo: Todo = {
-      id: this.todoService.getNewId(),
       text: this.todoText,
       completed: false
     };

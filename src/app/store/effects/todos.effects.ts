@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { mergeMap, catchError } from 'rxjs/operators';
+import { mergeMap, catchError, switchMap, map } from 'rxjs/operators';
 import { TodoService } from 'src/app/services/todo.service';
-import { EMPTY } from 'rxjs';
-import { loadTodoSuccess, addTodoSuccess } from '../actions';
+import { EMPTY, of } from 'rxjs';
+import {
+  loadTodoSuccess,
+  addTodoSuccess,
+  loadTodoFail,
+  addTodo,
+  loadTodo,
+  addTodoFail
+} from '../actions';
 
 @Injectable()
 export class TodoEffects {
@@ -11,25 +18,25 @@ export class TodoEffects {
 
   loadTodos$ = createEffect(() =>
     this.actions$.pipe(
-      ofType('[TODO ACTIONS] load todo'),
-      mergeMap(() =>
+      ofType(loadTodo),
+      switchMap(() =>
         this.todoService
-          .getAllTodos()
-          .map(todos => loadTodoSuccess({ todo: todos }))
+          .findAll()
+          .pipe(map(todos => loadTodoSuccess({ todo: todos })))
       ),
-      catchError(() => EMPTY)
+      catchError(error => of(loadTodoFail(error)))
     )
   );
 
   addTodos$ = createEffect(() =>
     this.actions$.pipe(
-      ofType('[TODO ACTIONS] add todo'),
+      ofType(addTodo),
       mergeMap((action: any) =>
         this.todoService
-          .addTodos(action.todo)
-          .map(newTodo => addTodoSuccess({ todo: newTodo }))
+          .create(action.todo)
+          .then(newTodo => addTodoSuccess({ todo: action.todo }))
       ),
-      catchError(() => EMPTY)
+      catchError(error => of(addTodoFail(error)))
     )
   );
 }

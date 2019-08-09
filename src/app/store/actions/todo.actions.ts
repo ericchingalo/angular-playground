@@ -9,7 +9,7 @@ export const addTodo = createAction(
 
 export const addTodoFail = createAction(
   '[TODO ACTIONS] add todo fail',
-  props<{ error: string }>()
+  props<{ error: any }>()
 );
 
 export const addTodoSuccess = createAction(
@@ -21,12 +21,12 @@ export const loadTodo = createAction('[TODO ACTIONS] load todo');
 
 export const loadTodoFail = createAction(
   '[TODO ACTIONS] load todo fail',
-  props<{ error: string }>()
+  props<{ error: any }>()
 );
 
 export const loadTodoSuccess = createAction(
   '[TODO ACTIONS] load todo sucess',
-  props<{ todo: Todo }>()
+  props<{ todo: Todo[] }>()
 );
 
 export const completeTodo = createAction(
@@ -35,7 +35,7 @@ export const completeTodo = createAction(
 );
 export const completeTodoFail = createAction(
   '[TODO ACTIONS]complete todo fail',
-  props<{ error: string }>()
+  props<{ error: any }>()
 );
 export const completeTodoSuccess = createAction(
   '[TODO ACTIONS]complete todo success',
