@@ -59,7 +59,13 @@ export class TodoService {
   }
 
   create(content: Todo) {
-    return this.angularFirestore.collection<Todo>(this.model).add(content);
+    // return this.angularFirestore.collection<Todo>(this.model).add(content);
+    return new Promise<any>((resolve, reject) => {
+      this.angularFirestore
+        .collection('todos')
+        .add(content)
+        .then(res => {}, err => reject(err));
+    });
   }
 
   update(id: string, content: Todo) {
