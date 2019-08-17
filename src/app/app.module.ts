@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AngularFireModule } from '@angular/fire';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { EffectsModule } from '@ngrx/effects';
@@ -13,13 +14,14 @@ import { environment } from '../environments/environment';
 import { TodoComponent } from './components/todo/todo.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { effects } from './store/effects';
-
+import { AngularFirestore } from '@angular/fire/firestore';
 @NgModule({
   declarations: [AppComponent, HomeComponent, TodoComponent, TodoListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
@@ -33,7 +35,7 @@ import { effects } from './store/effects';
     }),
     EffectsModule.forRoot(effects)
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

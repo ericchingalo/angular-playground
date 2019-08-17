@@ -18,7 +18,7 @@ export function sortByName(todo1: Todo, todo2: Todo): number {
   return todo1.text.localeCompare(todo2.text);
 }
 
-export function selectTodoId(todo: Todo): number {
+export function selectTodoId(todo: Todo): string {
   return todo.id;
 }
 
@@ -83,7 +83,7 @@ const reducer = createReducer(
     adding: false
   })),
   on(TodoActions.loadTodoSuccess, (state, { todo }) =>
-    adapter.addOne(todo, {
+    adapter.addMany(todo, {
       ...state,
       loading: false,
       loaded: true,
